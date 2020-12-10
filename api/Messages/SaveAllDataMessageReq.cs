@@ -7,6 +7,6 @@ namespace api.Messages
     {
         public int UserId { get; set; }
         public int InterestId { get; set; }
-        public List<string> ServiceIds { get; set; }
+        public List<int> ServiceIds { get; set; }
     }
 }

@@ -14,11 +14,11 @@ namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class userSeviceInterestController : Controller
+    public class UserSeviceInterestController : Controller
     {
         private DBContext _dBContext;
 
-        public userSeviceInterestController(DBContext context)
+        public UserSeviceInterestController(DBContext context)
         {
             _dBContext = context;
         }
@@ -30,7 +30,7 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save([FromBody]SaveAllDataMessageReq saveAllDataMessageReq)
+        public async Task<ActionResult> Post([FromBody]SaveAllDataMessageReq saveAllDataMessageReq)
         {
             if (saveAllDataMessageReq == null)
             {
@@ -44,7 +44,7 @@ namespace api.Controllers
             {
                 var userSeviceInterest = new UserSeviceInterest();
                 userSeviceInterest.UserId = saveAllDataMessageReq.UserId; 
-                userSeviceInterest.ServiceId =Int32.Parse(value);;
+                userSeviceInterest.ServiceId =value;;
                 userSeviceInterest.InterestId = saveAllDataMessageReq.InterestId;
                 _dBContext.UserSeviceInterests.Add(userSeviceInterest);
             }
@@ -112,7 +112,7 @@ namespace api.Controllers
                 return false;
             } 
         }
-        ~userSeviceInterestController()
+        ~UserSeviceInterestController()
         {
             _dBContext.Dispose();
         }
