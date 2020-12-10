@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using api.Models;
 using System.Threading.Tasks;
-
+using api.Messages;
 namespace api.Controllers
 {
     [Route("api/[controller]")]
@@ -50,9 +50,12 @@ namespace api.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var saveUserMessage = new SaveUserMessageRes();
             await _dBContext.Users.AddAsync(user);
             await _dBContext.SaveChangesAsync();
-            return Ok(user);
+            saveUserMessage.Services = _dBContext.Services.ToList();
+            saveUserMessage.User = user;
+            return Ok(saveUserMessage);
         }
 
         [HttpPut]

@@ -8,6 +8,7 @@ using System;
 using System.Net;
 using System.Net.Mail;
 using System.Text; 
+using api.Messages;
 
 namespace api.Controllers
 {
@@ -29,9 +30,9 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save([FromBody]UserSeviceInterest userSeviceInterest)
+        public ActionResult Save([FromBody]SaveAllDataMessageReq saveAllDataMessageReq)
         {
-            if (userSeviceInterest == null)
+            if (saveAllDataMessageReq == null)
             {
                 return NotFound("data is not supplied");
             }
@@ -39,9 +40,16 @@ namespace api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _dBContext.UserSeviceInterests.Add(userSeviceInterest);
+            foreach(var value in saveAllDataMessageReq.ServiceIds)
+            {
+                var userSeviceInterest = new UserSeviceInterest();
+                userSeviceInterest.UserId = saveAllDataMessageReq.UserId; 
+                userSeviceInterest.ServiceId =Int32.Parse(value);;
+                userSeviceInterest.InterestId = saveAllDataMessageReq.InterestId;
+                _dBContext.UserSeviceInterests.Add(userSeviceInterest);
+            }
             _dBContext.SaveChanges();
-            var userData = _dBContext.UserSeviceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).Where(i => i.User.UserId == userSeviceInterest.UserId).ToList();
+            var userData = _dBContext.UserSeviceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).Where(i => i.User.UserId == saveAllDataMessageReq.UserId).ToList();
             var val = SendEmailToUser(userData);
             return Ok(val);
         }
