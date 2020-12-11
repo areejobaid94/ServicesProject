@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api.Models
 {
-    public class UserSeviceInterest
+    public class UserServiceInterest
     {
-        public int UserSeviceInterestID{ get; set; }
+        public int UserServiceInterestId{ get; set; }
         public int  UserId { get; set; }
         public User User { get; set; }
         public int ServiceId { get; set; }

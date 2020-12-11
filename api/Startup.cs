@@ -40,7 +40,7 @@ namespace api
             );
             // string connectionString = Configuration.GetConnectionString("DefaultConnection");
             // services.AddDbContext<DbContext>(opt => opt.UseSqlServer(connectionString));
-            services.AddDbContextPool<DBContext>(
+   services.AddDbContextPool<DBContext>(
             options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionStr")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(c =>

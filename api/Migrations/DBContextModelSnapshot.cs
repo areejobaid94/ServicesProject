@@ -74,9 +74,9 @@ namespace api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("api.Models.UserSeviceInterest", b =>
+            modelBuilder.Entity("api.Models.UserServiceInterest", b =>
                 {
-                    b.Property<int>("UserSeviceInterestID")
+                    b.Property<int>("UserServiceInterestId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -90,7 +90,7 @@ namespace api.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserSeviceInterestID");
+                    b.HasKey("UserServiceInterestId");
 
                     b.HasIndex("InterestId");
 
@@ -98,25 +98,25 @@ namespace api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSeviceInterests");
+                    b.ToTable("UserServiceInterests");
                 });
 
-            modelBuilder.Entity("api.Models.UserSeviceInterest", b =>
+            modelBuilder.Entity("api.Models.UserServiceInterest", b =>
                 {
                     b.HasOne("api.Models.Interest", "Interest")
-                        .WithMany("UserSeviceInterests")
+                        .WithMany("UserServiceInterests")
                         .HasForeignKey("InterestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("api.Models.Service", "Service")
-                        .WithMany("UserSeviceInterests")
+                        .WithMany("UserServiceInterests")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("api.Models.User", "User")
-                        .WithMany("UserSeviceInterests")
+                        .WithMany("UserServiceInterests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -130,17 +130,17 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Interest", b =>
                 {
-                    b.Navigation("UserSeviceInterests");
+                    b.Navigation("UserServiceInterests");
                 });
 
             modelBuilder.Entity("api.Models.Service", b =>
                 {
-                    b.Navigation("UserSeviceInterests");
+                    b.Navigation("UserServiceInterests");
                 });
 
             modelBuilder.Entity("api.Models.User", b =>
                 {
-                    b.Navigation("UserSeviceInterests");
+                    b.Navigation("UserServiceInterests");
                 });
 #pragma warning restore 612, 618
         }

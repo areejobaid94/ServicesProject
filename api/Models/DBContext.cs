@@ -8,23 +8,23 @@ namespace api.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Interest> Interests { get; set; }
-        public DbSet<UserSeviceInterest> UserSeviceInterests { get; set; }
+        public DbSet<UserServiceInterest> UserServiceInterests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserSeviceInterest>()
+            modelBuilder.Entity<UserServiceInterest>()
             .HasOne(p => p.User)
-            .WithMany(b => b.UserSeviceInterests)
+            .WithMany(b => b.UserServiceInterests)
             .HasForeignKey(p => p.UserId);
 
-            modelBuilder.Entity<UserSeviceInterest>()
+            modelBuilder.Entity<UserServiceInterest>()
             .HasOne(p => p.Service)
-            .WithMany(b => b.UserSeviceInterests)
+            .WithMany(b => b.UserServiceInterests)
             .HasForeignKey(p => p.ServiceId);
 
-            modelBuilder.Entity<UserSeviceInterest>()
+            modelBuilder.Entity<UserServiceInterest>()
             .HasOne(p => p.Interest)
-            .WithMany(b => b.UserSeviceInterests)
+            .WithMany(b => b.UserServiceInterests)
             .HasForeignKey(p => p.InterestId);
         }
 

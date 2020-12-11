@@ -24,9 +24,9 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserSeviceInterest>> Get()
+        public ActionResult<IEnumerable<UserServiceInterest>> Get()
         {
-            return _dBContext.UserSeviceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).ToList();
+            return _dBContext.UserServiceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).ToList();
         }
 
         [HttpPost]
@@ -42,14 +42,14 @@ namespace api.Controllers
             }
             foreach(var value in saveAllDataMessageReq.ServiceIds)
             {
-                var userSeviceInterest = new UserSeviceInterest();
+                var userSeviceInterest = new UserServiceInterest();
                 userSeviceInterest.UserId = saveAllDataMessageReq.UserId; 
                 userSeviceInterest.ServiceId =value;;
                 userSeviceInterest.InterestId = saveAllDataMessageReq.InterestId;
-                _dBContext.UserSeviceInterests.Add(userSeviceInterest);
+                _dBContext.UserServiceInterests.Add(userSeviceInterest);
             }
             _dBContext.SaveChanges();
-            var userData = _dBContext.UserSeviceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).Where(i => i.User.UserId == saveAllDataMessageReq.UserId).ToList();
+            var userData = _dBContext.UserServiceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).Where(i => i.User.UserId == saveAllDataMessageReq.UserId).ToList();
             var val = SendEmailToUser(userData);
             return Ok(val);
         }
@@ -61,16 +61,16 @@ namespace api.Controllers
             {
                 return NotFound("Id is not supplied");
             }
-            UserSeviceInterest userSeviceInterest = _dBContext.UserSeviceInterests.FirstOrDefault(s => s.UserSeviceInterestID == id);
+            UserServiceInterest userSeviceInterest = _dBContext.UserServiceInterests.FirstOrDefault(s => s.UserServiceInterestId == id);
             if (userSeviceInterest == null)
             {
                 return NotFound("No User Sevice Interest found with particular id supplied");
             }
-            _dBContext.UserSeviceInterests.Remove(userSeviceInterest);
+            _dBContext.UserServiceInterests.Remove(userSeviceInterest);
             await _dBContext.SaveChangesAsync();
             return Ok("User Sevice Interest is deleted sucessfully.");
         }
-        public JsonResult SendEmailToUser(List<UserSeviceInterest> models )
+        public JsonResult SendEmailToUser(List<UserServiceInterest> models )
         {
             string htmlString = "";
             if (models.Count > 0 && models != null)

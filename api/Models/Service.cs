@@ -11,6 +11,6 @@ namespace api.Models
         [Required]
         public string ServiceName { get; set; }
 
-        public ICollection<UserSeviceInterest> UserSeviceInterests { get; set; }
+        public ICollection<UserServiceInterest> UserServiceInterests { get; set; }
     }
 }

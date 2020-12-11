@@ -48,10 +48,10 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserSeviceInterests",
+                name: "UserServiceInterests",
                 columns: table => new
                 {
-                    UserSeviceInterestID = table.Column<int>(type: "int", nullable: false)
+                    UserServiceInterestId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
@@ -59,21 +59,21 @@ namespace api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSeviceInterests", x => x.UserSeviceInterestID);
+                    table.PrimaryKey("PK_UserServiceInterests", x => x.UserServiceInterestId);
                     table.ForeignKey(
-                        name: "FK_UserSeviceInterests_Interests_InterestId",
+                        name: "FK_UserServiceInterests_Interests_InterestId",
                         column: x => x.InterestId,
                         principalTable: "Interests",
                         principalColumn: "InterestId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserSeviceInterests_Services_ServiceId",
+                        name: "FK_UserServiceInterests_Services_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "ServiceId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserSeviceInterests_Users_UserId",
+                        name: "FK_UserServiceInterests_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -81,25 +81,25 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSeviceInterests_InterestId",
-                table: "UserSeviceInterests",
+                name: "IX_UserServiceInterests_InterestId",
+                table: "UserServiceInterests",
                 column: "InterestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSeviceInterests_ServiceId",
-                table: "UserSeviceInterests",
+                name: "IX_UserServiceInterests_ServiceId",
+                table: "UserServiceInterests",
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSeviceInterests_UserId",
-                table: "UserSeviceInterests",
+                name: "IX_UserServiceInterests_UserId",
+                table: "UserServiceInterests",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserSeviceInterests");
+                name: "UserServiceInterests");
 
             migrationBuilder.DropTable(
                 name: "Interests");
