@@ -24,12 +24,14 @@ namespace api.Controllers
         }
 
         [HttpGet]
+
         public ActionResult<IEnumerable<UserServiceInterest>> Get()
         {
             return _dBContext.UserServiceInterests.Include(i=>i.User).Include(i=>i.Service).Include(i=>i.Interest).ToList();
         }
 
         [HttpPost]
+        [Route("save")]
         public async Task<ActionResult> Post([FromBody]SaveAllDataMessageReq saveAllDataMessageReq)
         {
             if (saveAllDataMessageReq == null)
